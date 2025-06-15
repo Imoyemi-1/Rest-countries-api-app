@@ -23,3 +23,21 @@
   --wgt-md: 600;
   --wgt-lg: 800;
 }
+
+/* reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 50%;
+}
+body {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* mobile worlflow style */
