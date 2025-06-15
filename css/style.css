@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+:root {
+  /* ### Neutral */
+
+  --Blue-900-Dark-Mode-Elements: hsl(209, 23%, 22%);
+  --Blue-950-Dark-Mode-Background: hsl(207, 26%, 17%);
+  --Grey-950-Light-Mode-Text: hsl(200, 15%, 8%);
+  --Grey-400-Ligh-Mode-Input: hsl(0, 0%, 50%);
+  --Grey-50-Light-Mode-Background: hsl(0, 0%, 99%);
+  --White-Dark-Mode-Text: hsl(0, 100%, 100%);
+
+  /* ## Typography */
+
+  --txt-sm: 8px;
+  --txt-smd: 12px;
+  --txt-md: 16px;
+  --txt-lg: 20px;
+  --txt-xlg: 24px;
+
+  /* weights */
+
+  --wgt-sm: 300;
+  --wgt-md: 600;
+  --wgt-lg: 800;
+}
