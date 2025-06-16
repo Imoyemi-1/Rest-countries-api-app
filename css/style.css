@@ -11,11 +11,13 @@
 
   /* ## Typography */
 
-  --txt-sm: 8px;
-  --txt-smd: 12px;
-  --txt-md: 16px;
-  --txt-lg: 20px;
-  --txt-xlg: 24px;
+  --txt-xsm: 1rem;
+  --txt-sm: 1.2rem;
+  --txt-smd: 1.4rem;
+  --txt-md: 1.6rem;
+  --txt-xmd: 1.8rem;
+  --txt-lg: 2rem;
+  --txt-xlg: 2.4rem;
 
   /* weights */
 
@@ -34,10 +36,39 @@
 }
 
 html {
-  font-size: 50%;
+  font-size: 62.5%;
 }
+
 body {
   font-family: 'Nunito Sans', sans-serif;
 }
 
 /* mobile worlflow style */
+
+header {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: var(--Blue-900-Dark-Mode-Elements);
+  color: var(--White-Dark-Mode-Text);
+  padding: 2.5rem 1rem;
+}
+
+header h2 {
+  font-size: var(--txt-xlg);
+  font-weight: var(--wgt-lg);
+  word-spacing: 0.5px;
+}
+
+header button {
+  display: flex;
+  border: none;
+  background: none;
+  font-size: var(--txt-md);
+  color: inherit;
+  column-gap: 10px;
+}
