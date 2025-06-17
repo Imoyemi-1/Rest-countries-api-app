@@ -281,6 +281,10 @@ form input::placeholder {
   box-shadow: 0 0 2px 2px var(--shadow);
 }
 
+a {
+  text-decoration: none;
+}
+
 @media screen and (min-width: 31.25rem) {
   #countries-container {
     display: grid;
