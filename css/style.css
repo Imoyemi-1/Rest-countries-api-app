@@ -8,7 +8,7 @@
   --Grey-400-Ligh-Mode-Input: hsl(0, 0%, 50%);
   --Grey-50-Light-Mode-Background: hsl(0, 0%, 99%);
   --White-Dark-Mode-Text: hsl(0, 100%, 100%);
-
+  --shadow: hsla(200, 15%, 8%, 0.2);
   /* ## Typography */
 
   --txt-xsm: 1rem;
@@ -57,7 +57,7 @@ header {
   background-color: var(--Blue-900-Dark-Mode-Elements);
   color: var(--White-Dark-Mode-Text);
   padding: 2.5rem 1.5rem;
-  box-shadow: 0 0 2px var(--Grey-950-Light-Mode-Text);
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 header h2 {
@@ -96,7 +96,7 @@ main {
   padding: 1.5rem 2rem;
   border-radius: 5px;
   width: 100%;
-  box-shadow: 0 0 2px var(--Grey-950-Light-Mode-Text);
+  box-shadow: 0 0 2px 2px var(--shadow);
   display: flex;
 }
 
@@ -127,7 +127,7 @@ form input::placeholder {
   border-radius: 7px;
   width: 100%;
   font-size: var(--txt-smd);
-  box-shadow: 0 0 2px var(--Grey-950-Light-Mode-Text);
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 #drop-down #options-container {
@@ -141,7 +141,7 @@ form input::placeholder {
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 2px var(--Grey-950-Light-Mode-Text);
+  box-shadow: 0 0 2px 2px var(--shadow);
   display: none;
 }
 
@@ -169,7 +169,7 @@ form input::placeholder {
   border-radius: 7px;
   transition: transform 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 0 2px var(--Grey-950-Light-Mode-Text);
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 .card-container img {
@@ -181,12 +181,11 @@ form input::placeholder {
 
 .country-info {
   color: var(--White-Dark-Mode-Text);
-  font-size: var(--txt-md);
   padding: 2rem;
 }
 
 .country-info h3 {
-  font-size: var(--txt-lg);
+  font-size: var(--txt-md);
   font-weight: var(--wgt-lg);
   margin-bottom: 2.5rem;
 }
@@ -201,9 +200,45 @@ form input::placeholder {
 .country-txt-info > p {
   font-weight: var(--wgt-md);
   letter-spacing: 1px;
+  font-size: var(--txt-smd);
 }
 
 .country-txt-info span {
   font-weight: var(--wgt-sm);
   color: var(--Grey-400-Ligh-Mode-Input);
+  font-size: var(--txt-sm);
+}
+
+@media screen and (min-width: 31.25rem) {
+  #countries-container {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    place-items: center;
+    gap: 2.5rem;
+  }
+
+  .card-container {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 41.3rem) {
+  html {
+    font-size: 65%;
+  }
+
+  #search-filter-cons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+  }
+
+  #search-filter-cons form {
+    max-width: 300px;
+  }
+
+  #drop-down {
+    min-width: 200px;
+  }
 }
