@@ -9,22 +9,39 @@ const getCountries = async (endpoint) => {
   return data;
 };
 
+// display all countries
+
+const displayAllCountries = async () => {
+  const data = await getCountries('data.json');
+  data.forEach((country) => createCountryElement(country));
+};
 // create element to display country
 
 function createCountryElement(country) {
   const article = document.createElement('article');
   article.classList = 'card-container';
   article.innerHTML = `<a href="/details.html?id=${country.name}">
-          <img src="download.png" alt="country flag" />
+          <img src= "${country.flags.png}" alt="country flag" />
           <div class="country-info">
-            <h3>United States of America</h3>
+            <h3>${country.name}</h3>
             <div class="country-txt-info">
-              <p>Population: <span>81,383,838</span></p>
-              <p>Region: <span>Americas</span></p>
-              <p>Capital: <span>Washington D.C</span></p>
+              <p>Population: <span>${country.population}</span></p>
+              <p>Region: <span>${country.region}</span></p>
+              <p>Capital: <span>${country.capital}</span></p>
             </div>
           </div>
         </a>`;
 
   countryContainer.appendChild(article);
 }
+
+function Init() {
+  if (
+    window.location.pathname === '/' ||
+    window.location.pathname === '/index.html'
+  ) {
+    displayAllCountries();
+  }
+}
+
+Init();

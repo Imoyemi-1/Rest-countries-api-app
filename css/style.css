@@ -64,6 +64,7 @@ header h2 {
   font-size: var(--txt-lg);
   font-weight: var(--wgt-lg);
   word-spacing: 0.5px;
+  cursor: pointer;
 }
 
 header button {
@@ -73,6 +74,7 @@ header button {
   font-size: var(--txt-md);
   color: inherit;
   column-gap: 10px;
+  cursor: pointer;
 }
 
 main {
@@ -283,6 +285,7 @@ form input::placeholder {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 @media screen and (min-width: 31.25rem) {
