@@ -174,8 +174,7 @@ form input::placeholder {
 
 .card-container img {
   width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  object-fit: cover;
   border-radius: 7px 7px 0 0;
 }
 
@@ -207,6 +206,77 @@ form input::placeholder {
   font-weight: var(--wgt-sm);
   color: var(--Grey-400-Ligh-Mode-Input);
   font-size: var(--txt-sm);
+}
+
+/* detail page mobile flow styling */
+
+#details-container {
+  margin: 3rem 2rem;
+}
+
+#back-btn {
+  border: none;
+  background-color: var(--Blue-900-Dark-Mode-Elements);
+  padding: 0.7rem 2.5rem 0.6rem;
+  color: var(--White-Dark-Mode-Text);
+  font-size: var(--txt-smd);
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px var(--shadow);
+  margin-bottom: 4rem;
+}
+
+.countries-details-con {
+  display: grid;
+  color: var(--White-Dark-Mode-Text);
+}
+
+#country-img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 3rem;
+}
+
+#country-name {
+  font-size: var(--txt-xmd);
+  margin-bottom: 2rem;
+}
+
+.country-txt-details,
+.country-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.country-txt-details p,
+.country-info-details p {
+  font-size: var(--txt-smd);
+}
+.country-txt-details span,
+.country-info-details span {
+  font-size: var(--txt-sm);
+  color: var(--Grey-400-Ligh-Mode-Input);
+}
+
+#country-borders-name {
+  font-weight: var(--wgt-md);
+  font-size: var(--txt-md);
+  margin-bottom: 1.5rem;
+}
+
+.country-borders-txt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.country-borders-txt p {
+  background-color: var(--Blue-900-Dark-Mode-Elements);
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  font-size: var(--txt-smd);
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 @media screen and (min-width: 31.25rem) {
