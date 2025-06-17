@@ -234,6 +234,7 @@ form input::placeholder {
   width: 100%;
   object-fit: cover;
   margin-bottom: 3rem;
+  max-width: 550px;
 }
 
 #country-name {
@@ -252,6 +253,7 @@ form input::placeholder {
 .country-txt-details p,
 .country-info-details p {
   font-size: var(--txt-smd);
+  white-space: nowrap;
 }
 .country-txt-details span,
 .country-info-details span {
@@ -310,5 +312,34 @@ form input::placeholder {
 
   #drop-down {
     min-width: 200px;
+  }
+
+  /* details page  for larger screen  */
+
+  .countries-details-con {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+    max-width: 1024px;
+    margin: auto;
+  }
+
+  .country-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 4rem;
+  }
+
+  #country-name {
+    grid-column: 1/3;
+  }
+
+  .country-borders-details {
+    grid-column: 1/3;
+  }
+}
+
+@media screen and (min-width: 64rem) {
+  html {
+    font-size: 75%;
   }
 }
