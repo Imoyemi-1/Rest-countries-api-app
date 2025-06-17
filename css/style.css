@@ -87,7 +87,7 @@ main {
   justify-content: space-between;
   row-gap: 15px;
   position: sticky;
-  top: 8.5rem;
+  top: 10rem;
 }
 
 #search-filter-cons form {
@@ -156,7 +156,7 @@ form input::placeholder {
 }
 
 #countries-container {
-  margin-top: 2rem;
+  margin-top: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -283,7 +283,6 @@ form input::placeholder {
 
 @media screen and (min-width: 31.25rem) {
   #countries-container {
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     place-items: center;
