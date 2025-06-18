@@ -22,10 +22,19 @@ const displayAllCountries = async () => {
 function createCountryElement(country) {
   const article = document.createElement('article');
   article.classList = 'card-container';
-  article.innerHTML = `<a href="/details.html?id=${country.name}">
+  article.innerHTML = `<a href="/details.html?id=${
+    dropDownSelected.querySelector('p').textContent !== 'Filter by Region'
+      ? country.name.common
+      : country.name
+  }">
           <img src= "${country.flags.svg}" alt="country flag" />
           <div class="country-info">
-            <h3>${country.name}</h3>
+            <h3>${
+              dropDownSelected.querySelector('p').textContent !==
+              'Filter by Region'
+                ? country.name.common
+                : country.name
+            }</h3>
             <div class="country-txt-info">
               <p>Population: <span>${country.population.toLocaleString()}</span></p>
               <p>Region: <span>${country.region}</span></p>
@@ -80,6 +89,24 @@ const selectRegionOption = (e) => {
   }
 
   e.currentTarget.classList.remove('visible');
+  filterByRegions();
+};
+
+// filter countries by region
+
+const filterByRegions = async () => {
+  const selectedtxt = dropDownSelected.querySelector('p').textContent;
+
+  countryContainer.innerHTML = '';
+
+  if (selectedtxt !== 'Filter by Region') {
+    const data = await getCountries(
+      `https://restcountries.com/v3.1/region/${selectedtxt}`
+    );
+    data.forEach((country) => createCountryElement(country));
+  } else {
+    displayAllCountries();
+  }
 };
 
 function Init() {
