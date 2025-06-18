@@ -128,6 +128,51 @@ const searchCountry = async (e) => {
   });
 };
 
+// display country details
+
+const displayCountryDetails = async () => {
+  const countryID = window.location.search.split('=');
+  const data = await getCountries(
+    `https://restcountries.com/v3.1/name/${countryID[1]}`
+  );
+  console.log(data[0]);
+  const country = data[0];
+  const nativeName = Object.values(country.name.nativeName);
+  const currencies = Object.values(country.currencies);
+  const section = document.createElement('section');
+  section.classList = 'countries-details-con';
+  section.innerHTML = ` 
+        <img src="${country.flags.svg}" alt="flag" id="country-img" />
+        <div class="country-details">
+          <h3 id="country-name">${country.name.common}</h3>
+          <div class="country-txt-details">
+            <p>Native Name: <span>${
+              nativeName[nativeName.length - 1].common
+            }</span></p>
+            <p>Population: <span>${country.population.toLocaleString()}</span></p>
+            <p>Region: <span>${country.region}</span></p>
+            <p>Sub Region: <span>${country.subregion}</span></p>
+            <p>Capital: <span>${country.capital}</span></p>
+          </div>
+          <div class="country-info-details">
+            <p>Top Level Domain: <span>${country.tld}</span></p>
+            <p>Currencies: <span>${currencies[0].name}</span></p>
+            <p>Languages: <span>Dutch</span></p>
+          </div>
+          <div class="country-borders-details">
+            <p id="country-borders-name">Border Countries:</p>
+            <div class="country-borders-txt">
+              <p>France</p>
+              <p>Germany</p>
+              <p>Nethlands</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+  document.querySelector('#details-container').appendChild(section);
+};
+
 function Init() {
   if (
     window.location.pathname === '/' ||
@@ -138,6 +183,8 @@ function Init() {
     dropDownSelected.addEventListener('click', openDropDown);
     dropDownOptions.addEventListener('click', selectRegionOption);
     searchInput.addEventListener('input', searchCountry);
+  } else {
+    displayCountryDetails();
   }
 }
 
