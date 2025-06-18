@@ -67,6 +67,21 @@ const displayRegion = async () => {
   });
 };
 
+// select region from dropDown
+
+const selectRegionOption = (e) => {
+  const selectTxt = dropDownSelected.querySelector('p');
+  if (e.target.tagName === 'LI') {
+    if (e.target.textContent === 'All') {
+      selectTxt.textContent = 'Filter by Region';
+    } else {
+      selectTxt.textContent = e.target.textContent;
+    }
+  }
+
+  e.currentTarget.classList.remove('visible');
+};
+
 function Init() {
   if (
     window.location.pathname === '/' ||
@@ -75,6 +90,7 @@ function Init() {
     displayAllCountries();
     displayRegion();
     dropDownSelected.addEventListener('click', openDropDown);
+    dropDownOptions.addEventListener('click', selectRegionOption);
   }
 }
 
