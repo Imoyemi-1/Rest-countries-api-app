@@ -139,7 +139,7 @@ form input::placeholder {
   color: var(--White-Dark-Mode-Text);
   padding: 1rem;
   width: 100%;
-  top: 48px;
+  top: 52px;
   border-radius: 7px;
   display: flex;
   flex-direction: column;

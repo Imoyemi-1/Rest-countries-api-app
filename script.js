@@ -1,4 +1,6 @@
 const countryContainer = document.getElementById('countries-container');
+const dropDownSelected = document.getElementById('selected');
+const dropDownOptions = document.getElementById('options-container');
 
 // fetch country from api
 
@@ -25,7 +27,7 @@ function createCountryElement(country) {
           <div class="country-info">
             <h3>${country.name}</h3>
             <div class="country-txt-info">
-              <p>Population: <span>${country.population}</span></p>
+              <p>Population: <span>${country.population.toLocaleString()}</span></p>
               <p>Region: <span>${country.region}</span></p>
               <p>Capital: <span>${country.capital}</span></p>
             </div>
@@ -35,6 +37,14 @@ function createCountryElement(country) {
   countryContainer.appendChild(article);
 }
 
+// open drop down filter box
+
+const openDropDown = () => {
+  dropDownOptions.style.display === 'none'
+    ? (dropDownOptions.style.display = 'block')
+    : (dropDownOptions.style.display = 'none');
+};
+
 function Init() {
   if (
     window.location.pathname === '/' ||
@@ -42,6 +52,8 @@ function Init() {
   ) {
     displayAllCountries();
   }
+
+  dropDownSelected.addEventListener('click', openDropDown);
 }
 
 Init();
