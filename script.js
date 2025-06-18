@@ -1,6 +1,6 @@
 const countryContainer = document.getElementById('countries-container');
 const dropDownSelected = document.getElementById('selected');
-const dropDownOptions = document.getElementById('options-container');
+const dropDownOptions = document.querySelector('.options-container');
 
 // fetch country from api
 
@@ -40,9 +40,31 @@ function createCountryElement(country) {
 // open drop down filter box
 
 const openDropDown = () => {
-  dropDownOptions.style.display === 'none'
-    ? (dropDownOptions.style.display = 'block')
-    : (dropDownOptions.style.display = 'none');
+  dropDownOptions.classList.toggle('visible');
+};
+
+// create and display list options for dropdown
+
+const displayRegion = async () => {
+  const data = await getCountries(
+    'https://restcountries.com/v3.1/all?fields=region'
+  );
+
+  const region = [];
+
+  data.forEach((item) => {
+    if (!region.includes(item.region)) {
+      region.push(item.region);
+    }
+  });
+
+  region.forEach((region) => {
+    const list = document.createElement('li');
+    list.classList = 'options';
+    list.textContent = region;
+
+    dropDownOptions.appendChild(list);
+  });
 };
 
 function Init() {
@@ -51,9 +73,9 @@ function Init() {
     window.location.pathname === '/index.html'
   ) {
     displayAllCountries();
+    displayRegion();
+    dropDownSelected.addEventListener('click', openDropDown);
   }
-
-  dropDownSelected.addEventListener('click', openDropDown);
 }
 
 Init();

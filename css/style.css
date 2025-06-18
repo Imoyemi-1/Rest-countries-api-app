@@ -132,7 +132,7 @@ form input::placeholder {
   box-shadow: 0 0 2px 2px var(--shadow);
 }
 
-#drop-down #options-container {
+.options-container {
   list-style: none;
   position: absolute;
   background-color: var(--Blue-900-Dark-Mode-Elements);
@@ -147,13 +147,17 @@ form input::placeholder {
   display: none;
 }
 
-#options-container > li {
+.options-container.visible {
+  display: block;
+}
+
+.options-container > li {
   cursor: pointer;
   transition: background 0.3s ease;
   padding: 0.5rem 0;
 }
 
-#options-container > li:hover {
+.options-container > li:hover {
   background-color: var(--Grey-400-Ligh-Mode-Input);
 }
 
