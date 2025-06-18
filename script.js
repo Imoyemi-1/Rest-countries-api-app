@@ -21,7 +21,7 @@ function createCountryElement(country) {
   const article = document.createElement('article');
   article.classList = 'card-container';
   article.innerHTML = `<a href="/details.html?id=${country.name}">
-          <img src= "${country.flags.png}" alt="country flag" />
+          <img src= "${country.flags.svg}" alt="country flag" />
           <div class="country-info">
             <h3>${country.name}</h3>
             <div class="country-txt-info">
