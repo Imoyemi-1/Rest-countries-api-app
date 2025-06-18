@@ -92,7 +92,7 @@ main {
   top: 10rem;
 }
 
-#search-filter-cons form {
+#search-filter-cons #form {
   background-color: var(--Blue-900-Dark-Mode-Elements);
   color: var(--White-Dark-Mode-Text);
   padding: 1.5rem 2rem;
@@ -102,7 +102,7 @@ main {
   display: flex;
 }
 
-form input {
+#form input {
   background: none;
   border: none;
   outline: none;
@@ -111,7 +111,7 @@ form input {
   width: 100%;
 }
 
-form input::placeholder {
+#form input::placeholder {
   color: var(--White-Dark-Mode-Text);
 }
 
@@ -320,7 +320,7 @@ a {
     flex-direction: row;
   }
 
-  #search-filter-cons form {
+  #search-filter-cons #form {
     max-width: 300px;
   }
 

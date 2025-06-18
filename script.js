@@ -1,6 +1,7 @@
 const countryContainer = document.getElementById('countries-container');
 const dropDownSelected = document.getElementById('selected');
 const dropDownOptions = document.querySelector('.options-container');
+const searchInput = document.querySelector('input');
 
 // fetch country from api
 
@@ -89,6 +90,7 @@ const selectRegionOption = (e) => {
   }
 
   e.currentTarget.classList.remove('visible');
+  searchInput.value = '';
   filterByRegions();
 };
 
@@ -109,6 +111,23 @@ const filterByRegions = async () => {
   }
 };
 
+// display country by search
+
+const searchCountry = async (e) => {
+  countryContainer.innerHTML = '';
+  dropDownSelected.querySelector('p').textContent = 'Filter by Region';
+  const data = await getCountries('data.json');
+
+  const searchedCountry = data.filter(
+    (country) =>
+      country.name.toLowerCase().indexOf(e.target.value.trim()) !== -1
+  );
+
+  searchedCountry.forEach((item) => {
+    createCountryElement(item);
+  });
+};
+
 function Init() {
   if (
     window.location.pathname === '/' ||
@@ -118,6 +137,7 @@ function Init() {
     displayRegion();
     dropDownSelected.addEventListener('click', openDropDown);
     dropDownOptions.addEventListener('click', selectRegionOption);
+    searchInput.addEventListener('input', searchCountry);
   }
 }
 
