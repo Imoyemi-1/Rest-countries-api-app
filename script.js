@@ -132,46 +132,68 @@ const searchCountry = async (e) => {
 
 const displayCountryDetails = async () => {
   const countryID = window.location.search.split('=');
-  const data = await getCountries(
-    `https://restcountries.com/v3.1/name/${countryID[1]}`
-  );
-  console.log(data[0]);
+  const res = await getCountries('data.json');
+  const data = res.filter((item) => item.name === countryID[1]);
+  console.log(data);
   const country = data[0];
-  const nativeName = Object.values(country.name.nativeName);
-  const currencies = Object.values(country.currencies);
+
+  let countryBorders;
+
+  if (country.borders) countryBorders = country.borders;
+
+  const borderContainers = await getBorders(countryBorders);
+  const countryEl = borderContainers.map((item) => {
+    return `<a href="/details.html?id=${item.name}"><p>${item.name}</p></a>`;
+  });
+
+  // creating Element for details page
+
   const section = document.createElement('section');
   section.classList = 'countries-details-con';
   section.innerHTML = ` 
         <img src="${country.flags.svg}" alt="flag" id="country-img" />
         <div class="country-details">
-          <h3 id="country-name">${country.name.common}</h3>
+          <h3 id="country-name">${country.name}</h3>
           <div class="country-txt-details">
-            <p>Native Name: <span>${
-              nativeName[nativeName.length - 1].common
-            }</span></p>
+            <p>Native Name: <span>${country.nativeName}</span></p>
             <p>Population: <span>${country.population.toLocaleString()}</span></p>
             <p>Region: <span>${country.region}</span></p>
             <p>Sub Region: <span>${country.subregion}</span></p>
             <p>Capital: <span>${country.capital}</span></p>
           </div>
           <div class="country-info-details">
-            <p>Top Level Domain: <span>${country.tld}</span></p>
-            <p>Currencies: <span>${currencies[0].name}</span></p>
-            <p>Languages: <span>Dutch</span></p>
+            <p>Top Level Domain: <span>${country.topLevelDomain}</span></p>
+            <p>Currencies: <span>${country.currencies[0].name}</span></p>
+            <p>Languages: <span>${country.languages.map(
+              (item) => item.name
+            )}</span></p>
           </div>
           <div class="country-borders-details">
             <p id="country-borders-name">Border Countries:</p>
             <div class="country-borders-txt">
-              <p>France</p>
-              <p>Germany</p>
-              <p>Nethlands</p>
+            ${countryEl.map((item) => item).join('')}
             </div>
           </div>
         </div>
       `;
 
-  document.querySelector('#details-container').appendChild(section);
+  // creating border element
+  const borderCons = document.createElement('div');
+  borderCons.classList = 'country-borders-details';
+  borderCons.innerHTML = document
+    .querySelector('#details-container')
+    .appendChild(section);
 };
+
+//
+async function getBorders(arr) {
+  const data = await getCountries('data.json');
+
+  const borderCountry = data.filter((country) =>
+    arr.includes(country.alpha3Code)
+  );
+  return borderCountry;
+}
 
 function Init() {
   if (
