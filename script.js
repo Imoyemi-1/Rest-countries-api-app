@@ -15,28 +15,23 @@ const getCountries = async (endpoint) => {
 // display all countries
 
 const displayAllCountries = async () => {
-  const data = await getCountries('data.json');
-  data.forEach((country) => createCountryElement(country));
+  const data = await getCountries(
+    `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3`
+  );
+  const sortData = data.sort((a, b) =>
+    a.name.common.localeCompare(b.name.common)
+  );
+  sortData.forEach((country) => createCountryElement(country));
 };
 // create element to display country
 
 function createCountryElement(country) {
   const article = document.createElement('article');
   article.classList = 'card-container';
-  console.log(country);
-  article.innerHTML = `<a href="/details.html?id=${
-    dropDownSelected.querySelector('p').textContent !== 'Filter by Region'
-      ? country.cca3
-      : country.alpha3Code
-  }">
+  article.innerHTML = `<a href="/details.html?id=${country.cca3}">
           <img src= "${country.flags.svg}" alt="country flag" />
           <div class="country-info">
-            <h3>${
-              dropDownSelected.querySelector('p').textContent !==
-              'Filter by Region'
-                ? country.name.common
-                : country.name
-            }</h3>
+            <h3>${country.name.common}</h3>
             <div class="country-txt-info">
               <p>Population: <span>${country.population.toLocaleString()}</span></p>
               <p>Region: <span>${country.region}</span></p>
@@ -106,7 +101,11 @@ const filterByRegions = async () => {
     const data = await getCountries(
       `https://restcountries.com/v3.1/region/${selectedtxt}`
     );
-    data.forEach((country) => createCountryElement(country));
+    const sortData = data.sort((a, b) =>
+      a.name.common.localeCompare(b.name.common)
+    );
+    sortData.forEach((country) => createCountryElement(country));
+    console.log(sortData);
   } else {
     displayAllCountries();
   }
@@ -117,11 +116,17 @@ const filterByRegions = async () => {
 const searchCountry = async (e) => {
   countryContainer.innerHTML = '';
   dropDownSelected.querySelector('p').textContent = 'Filter by Region';
-  const data = await getCountries('data.json');
+  const data = await getCountries(
+    `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3`
+  );
 
-  const searchedCountry = data.filter(
+  const sortData = data.sort((a, b) =>
+    a.name.common.localeCompare(b.name.common)
+  );
+
+  const searchedCountry = sortData.filter(
     (country) =>
-      country.name.toLowerCase().indexOf(e.target.value.trim()) !== -1
+      country.name.common.toLowerCase().indexOf(e.target.value.trim()) !== -1
   );
 
   searchedCountry.forEach((item) => {
@@ -133,12 +138,9 @@ const searchCountry = async (e) => {
 
 const displayCountryDetails = async () => {
   const countryID = window.location.search.split('=');
-  const res = await getCountries('data.json');
-  const data = res.filter((item) => item.alpha3Code === countryID[1]);
-  console.log(countryID[1]);
-  console.log(res);
-  console.log(data);
-  // res.forEach((item) => console.log(item.alpha3Code));
+  const data = await getCountries(
+    `https://restcountries.com/v3.1/alpha/${countryID[1]}`
+  );
   const country = data[0];
 
   let countryBorders;
@@ -146,9 +148,21 @@ const displayCountryDetails = async () => {
   if (country.borders) countryBorders = country.borders;
 
   const borderContainers = await getBorders(countryBorders);
-  const countryEl = borderContainers.map((item) => {
-    return `<a href="/details.html?id=${item.alpha3Code}"><p>${item.name}</p></a>`;
-  });
+
+  let countryEl;
+  if (borderContainers.length !== 0) {
+    countryEl = borderContainers.map((item) => {
+      return `<a href="/details.html?id=${item.cca3}"><p>${item.name.common}</p></a>`;
+    });
+  } else {
+    countryEl = '<p>none</p>';
+  }
+
+  //set info more than one
+
+  const nativeName = Object.values(country.name.nativeName || {});
+  const currencies = Object.values(country.currencies || {});
+  const languages = Object.values(country.languages || {});
 
   // creating Element for details page
 
@@ -157,47 +171,50 @@ const displayCountryDetails = async () => {
   section.innerHTML = ` 
         <img src="${country.flags.svg}" alt="flag" id="country-img" />
         <div class="country-details">
-          <h3 id="country-name">${country.name}</h3>
+          <h3 id="country-name">${country.name.common}</h3>
           <div class="country-txt-details">
-            <p>Native Name: <span>${country.nativeName}</span></p>
+            <p>Native Name: <span>${
+              nativeName.length !== 0
+                ? nativeName[nativeName.length - 1].common
+                : 'none'
+            }</span></p>
             <p>Population: <span>${country.population.toLocaleString()}</span></p>
             <p>Region: <span>${country.region}</span></p>
             <p>Sub Region: <span>${country.subregion}</span></p>
             <p>Capital: <span>${country.capital}</span></p>
           </div>
           <div class="country-info-details">
-            <p>Top Level Domain: <span>${country.topLevelDomain}</span></p>
-            <p>Currencies: <span>${country.currencies[0].name}</span></p>
-            <p>Languages: <span>${country.languages.map(
-              (item) => item.name
-            )}</span></p>
+            <p>Top Level Domain: <span>${country.tld}</span></p>
+            <p>Currencies: <span>${
+              currencies.length !== 0 ? currencies[0].name : 'none'
+            }</span></p>
+            <p>Languages: <span>${languages
+              .map((item) => item)
+              .join(',  ')}</span></p>
           </div>
           <div class="country-borders-details">
             <p id="country-borders-name">Border Countries:</p>
             <div class="country-borders-txt">
-            ${countryEl.map((item) => item).join('')}
+            ${
+              Array.isArray(countryEl)
+                ? countryEl.map((item) => item).join('')
+                : countryEl
+            }
             </div>
           </div>
         </div>
       `;
 
-  // creating border element
-  const borderCons = document.createElement('div');
-  borderCons.classList = 'country-borders-details';
-  borderCons.innerHTML = document
-    .querySelector('#details-container')
-    .appendChild(section);
-
-  console.log(window.location.search);
+  document.querySelector('#details-container').appendChild(section);
 };
 
 //
 async function getBorders(arr = []) {
-  const data = await getCountries('data.json');
-
-  const borderCountry = data.filter((country) =>
-    arr.includes(country.alpha3Code)
+  const data = await getCountries(
+    `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3`
   );
+
+  const borderCountry = data.filter((country) => arr.includes(country.cca3));
   return borderCountry;
 }
 
