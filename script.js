@@ -23,10 +23,11 @@ const displayAllCountries = async () => {
 function createCountryElement(country) {
   const article = document.createElement('article');
   article.classList = 'card-container';
+  console.log(country);
   article.innerHTML = `<a href="/details.html?id=${
     dropDownSelected.querySelector('p').textContent !== 'Filter by Region'
-      ? country.name.common
-      : country.name
+      ? country.cca3
+      : country.alpha3Code
   }">
           <img src= "${country.flags.svg}" alt="country flag" />
           <div class="country-info">
@@ -133,8 +134,11 @@ const searchCountry = async (e) => {
 const displayCountryDetails = async () => {
   const countryID = window.location.search.split('=');
   const res = await getCountries('data.json');
-  const data = res.filter((item) => item.name === countryID[1]);
+  const data = res.filter((item) => item.alpha3Code === countryID[1]);
+  console.log(countryID[1]);
+  console.log(res);
   console.log(data);
+  // res.forEach((item) => console.log(item.alpha3Code));
   const country = data[0];
 
   let countryBorders;
@@ -143,7 +147,7 @@ const displayCountryDetails = async () => {
 
   const borderContainers = await getBorders(countryBorders);
   const countryEl = borderContainers.map((item) => {
-    return `<a href="/details.html?id=${item.name}"><p>${item.name}</p></a>`;
+    return `<a href="/details.html?id=${item.alpha3Code}"><p>${item.name}</p></a>`;
   });
 
   // creating Element for details page
@@ -183,10 +187,12 @@ const displayCountryDetails = async () => {
   borderCons.innerHTML = document
     .querySelector('#details-container')
     .appendChild(section);
+
+  console.log(window.location.search);
 };
 
 //
-async function getBorders(arr) {
+async function getBorders(arr = []) {
   const data = await getCountries('data.json');
 
   const borderCountry = data.filter((country) =>
