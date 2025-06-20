@@ -49,6 +49,12 @@ const openDropDown = () => {
   dropDownOptions.classList.toggle('visible');
 };
 
+const closeDropDown = (e) => {
+  if (!document.getElementById('drop-down').contains(e.target)) {
+    dropDownOptions.classList.remove('visible');
+  }
+};
+
 // create and display list options for dropdown
 
 const displayRegion = async () => {
@@ -105,7 +111,6 @@ const filterByRegions = async () => {
       a.name.common.localeCompare(b.name.common)
     );
     sortData.forEach((country) => createCountryElement(country));
-    console.log(sortData);
   } else {
     displayAllCountries();
   }
@@ -228,6 +233,7 @@ function Init() {
     dropDownSelected.addEventListener('click', openDropDown);
     dropDownOptions.addEventListener('click', selectRegionOption);
     searchInput.addEventListener('input', searchCountry);
+    document.addEventListener('click', closeDropDown);
   } else {
     displayCountryDetails();
   }
