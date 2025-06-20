@@ -3,6 +3,7 @@ const dropDownSelected = document.getElementById('selected');
 const dropDownOptions = document.querySelector('.options-container');
 const searchInput = document.querySelector('input');
 const DarkModeBtn = document.getElementById('dark-mode-btn');
+const spinner = document.getElementById('spinner');
 
 // fetch country from api
 
@@ -16,6 +17,7 @@ const getCountries = async (endpoint) => {
 // display all countries
 
 const displayAllCountries = async () => {
+  spinner.style.display = 'flex';
   const data = await getCountries(
     `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3`
   );
@@ -23,6 +25,7 @@ const displayAllCountries = async () => {
     a.name.common.localeCompare(b.name.common)
   );
   sortData.forEach((country) => createCountryElement(country));
+  spinner.style.display = 'none';
 };
 // create element to display country
 
@@ -105,6 +108,7 @@ const filterByRegions = async () => {
   countryContainer.innerHTML = '';
 
   if (selectedtxt !== 'Filter by Region') {
+    spinner.style.display = 'flex';
     const data = await getCountries(
       `https://restcountries.com/v3.1/region/${selectedtxt}`
     );
@@ -112,6 +116,7 @@ const filterByRegions = async () => {
       a.name.common.localeCompare(b.name.common)
     );
     sortData.forEach((country) => createCountryElement(country));
+    spinner.style.display = 'none';
   } else {
     displayAllCountries();
   }
@@ -122,6 +127,7 @@ const filterByRegions = async () => {
 const searchCountry = async (e) => {
   countryContainer.innerHTML = '';
   dropDownSelected.querySelector('p').textContent = 'Filter by Region';
+  spinner.style.display = 'flex';
   const data = await getCountries(
     `https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3`
   );
@@ -138,6 +144,7 @@ const searchCountry = async (e) => {
   searchedCountry.forEach((item) => {
     createCountryElement(item);
   });
+  spinner.style.display = 'none';
 };
 
 // display country details
@@ -212,6 +219,7 @@ const displayCountryDetails = async () => {
       `;
 
   document.querySelector('#details-container').appendChild(section);
+  spinner.style.display = 'none';
 };
 
 //
