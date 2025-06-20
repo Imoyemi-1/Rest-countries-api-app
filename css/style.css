@@ -26,6 +26,15 @@
   --wgt-lg: 800;
 }
 
+/* dark mode */
+
+.dark-mode {
+  --Blue-900-Dark-Mode-Elements: hsl(0, 100%, 100%);
+  --Blue-950-Dark-Mode-Background: hsl(0, 0%, 98%);
+  --White-Dark-Mode-Text: hsl(200, 15%, 8%);
+  --shadow: hsla(200, 27%, 96%, 0.9);
+}
+
 /* reset */
 *,
 *::before,

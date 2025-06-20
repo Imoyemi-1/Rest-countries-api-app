@@ -2,6 +2,7 @@ const countryContainer = document.getElementById('countries-container');
 const dropDownSelected = document.getElementById('selected');
 const dropDownOptions = document.querySelector('.options-container');
 const searchInput = document.querySelector('input');
+const DarkModeBtn = document.getElementById('dark-mode-btn');
 
 // fetch country from api
 
@@ -223,6 +224,16 @@ async function getBorders(arr = []) {
   return borderCountry;
 }
 
+// dark and light mode
+
+const darkMode = () => {
+  const html = document.documentElement;
+  html.classList.toggle('dark-mode');
+  html.classList.contains('dark-mode')
+    ? localStorage.setItem('darkMode', 'light')
+    : localStorage.setItem('darkMode', 'dark');
+};
+
 function Init() {
   if (
     window.location.pathname === '/' ||
@@ -237,6 +248,15 @@ function Init() {
   } else {
     displayCountryDetails();
   }
+  DarkModeBtn.addEventListener('click', darkMode);
+  document.addEventListener('DOMContentLoaded', () => {
+    const storageDarkMode = localStorage.getItem('darkMode');
+    if (storageDarkMode === 'light') {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+  });
 }
 
 Init();
