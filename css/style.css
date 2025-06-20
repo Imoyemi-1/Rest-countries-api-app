@@ -195,6 +195,7 @@ main {
   object-fit: cover;
   display: block;
   border-radius: 7px 7px 0 0;
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 .country-info {
@@ -255,6 +256,7 @@ main {
   object-fit: cover;
   margin-bottom: 3rem;
   max-width: 550px;
+  box-shadow: 0 0 2px 2px var(--shadow);
 }
 
 #country-name {
