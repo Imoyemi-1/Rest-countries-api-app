@@ -212,7 +212,7 @@ main {
 .country-txt-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 5px;
   margin-bottom: 3rem;
 }
 
@@ -333,7 +333,7 @@ a {
   }
 
   #search-filter-cons #form {
-    max-width: 300px;
+    max-width: 350px;
   }
 
   #drop-down {
