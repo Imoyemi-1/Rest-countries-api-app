@@ -249,6 +249,7 @@ main {
 .countries-details-con {
   display: grid;
   color: var(--White-Dark-Mode-Text);
+  justify-self: center;
 }
 
 #country-img {
@@ -281,6 +282,7 @@ main {
 .country-info-details span {
   font-size: var(--txt-smd);
   color: var(--Grey-400-Ligh-Mode-Input);
+  white-space: wrap;
 }
 
 #country-borders-name {
