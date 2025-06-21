@@ -138,7 +138,9 @@ const searchCountry = async (e) => {
 
   const searchedCountry = sortData.filter(
     (country) =>
-      country.name.common.toLowerCase().indexOf(e.target.value.trim()) !== -1
+      country.name.common
+        .toLowerCase()
+        .indexOf(e.target.value.toLowerCase().trim()) !== -1
   );
 
   searchedCountry.forEach((item) => {
