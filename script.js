@@ -106,7 +106,7 @@ const filterByRegions = async () => {
   const selectedtxt = dropDownSelected.querySelector('p').textContent;
 
   countryContainer.innerHTML = '';
-
+  showError.style.display = 'none';
   if (selectedtxt !== 'Filter by Region') {
     spinner.style.display = 'flex';
     const data = await getCountries(
@@ -147,6 +147,9 @@ const searchCountry = async (e) => {
   spinner.style.display = 'none';
   if (searchedCountry.length === 0) {
     showError.style.display = 'block';
+    setTimeout(() => {
+      showError.style.display = 'none';
+    }, 2000);
   } else {
     showError.style.display = 'none';
   }
