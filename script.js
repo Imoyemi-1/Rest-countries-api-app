@@ -4,7 +4,7 @@ const dropDownOptions = document.querySelector('.options-container');
 const searchInput = document.querySelector('input');
 const DarkModeBtn = document.getElementById('dark-mode-btn');
 const spinner = document.getElementById('spinner');
-
+const showError = document.getElementById('show-message');
 // fetch country from api
 
 const getCountries = async (endpoint) => {
@@ -145,6 +145,11 @@ const searchCountry = async (e) => {
     createCountryElement(item);
   });
   spinner.style.display = 'none';
+  if (searchedCountry.length === 0) {
+    showError.style.display = 'block';
+  } else {
+    showError.style.display = 'none';
+  }
 };
 
 // display country details
