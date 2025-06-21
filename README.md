@@ -34,7 +34,7 @@ Users will be able to:
 ### Links
 
 - Solution URL: [Github](https://github.com/Imoyemi-1/Rest-countries-api-app.git)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Rest country app](https://rest-country-app12.netlify.app)
 
 ### Built with
 
